@@ -1,0 +1,21 @@
+{
+	"name": "zadanie_kalkulator_s",
+	"homepage": "https://github.com/NapieralaSzymon/zadanie_kalkulator_s",
+	"authors": [
+		"Szymon Napierała <szymon.napierala@wercia.pl>"
+	],
+	"description": "",
+	"main": "",
+	"dependencies": {
+		"angular": "1.6.6",
+		"bootstrap": "3.3"
+	},
+	"license": "MIT",
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	]
+}
