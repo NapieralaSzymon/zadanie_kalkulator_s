@@ -2,6 +2,7 @@ package pl.wercia.calculator.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,14 @@ public class CountryController {
 
 	@RequestMapping(value = "/gain")
 	public BigDecimal getGain(
-			@RequestParam(value = "countryCode") String countryCode,
-			@RequestParam(value = "dailyIncome") BigDecimal dailyIncome) {
-		CountryService countryService = countryServices.stream()
+			@RequestParam(value = "countryCode", defaultValue = "") String countryCode,
+			@RequestParam(value = "dailyIncome", defaultValue = "0") BigDecimal dailyIncome) {
+		Optional<CountryService> countryService = countryServices.stream()
 				.filter(service -> service.getCountrySymbol().equals(countryCode))
-				.findFirst().get();
-		return countryService.calculateGainByDailyIncome(dailyIncome);
+				.findFirst();
+		return countryService.isPresent()
+				? countryService.get().calculateGainByDailyIncome(dailyIncome)
+				: new BigDecimal(0);
 	}
 
 }

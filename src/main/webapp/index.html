@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="calculatorApp">
 
 <head>
 	<meta charset="utf-8">
@@ -11,9 +11,10 @@
     <script src="resources/bower/jquery/dist/jquery.min.js" type="text/javascript"></script>
     <script src="resources/bower/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="resources/bower/angular/angular.min.js" type="text/javascript"></script>
+    <script src="resources/js/main.js" type="text/javascript"></script>
 </head>
 
-<body>
+<body ng-controller="CalculatorController">
 
 	<div class="container">
 
@@ -21,6 +22,23 @@
 			<h1>Calculator</h1>
 			<p class="lead">Calculator for Germany, Great Britain and Poland.</p>
 		</div>
+
+		<form>
+			<div class="form-group">
+				<label for="countryCode">Country code</label>
+				<select class="form-control" id="countryCode" ng-model="countryCode" ng-change="calculateGain()">
+					<option ng-repeat="countryCode in countryCodes">{{countryCode}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="dailyIncome">Daily income</label>
+				<input class="form-control" id="dailyIncome" type="number" ng-model="dailyIncome" ng-change="calculateGain()" />
+			</div>
+			<div class="form-group">
+				<label for="gain">Gain</label>
+				<input class="form-control" id="gain" disabled="disabled" value="{{gain}}" />
+			</div>
+		</form>
 
 	</div>
 
