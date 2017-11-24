@@ -25,13 +25,13 @@
 
 		<form>
 			<div class="form-group">
-				<label for="countryCode">Country code</label>
-				<select class="form-control" id="countryCode" ng-model="countryCode" ng-change="calculateGain()">
-					<option ng-repeat="countryCode in countryCodes">{{countryCode}}</option>
+				<label for="countrySymbol">Country</label>
+				<select class="form-control" id="countrySymbol" ng-model="countryIndex" ng-change="calculateGain()">
+					<option ng-repeat="country in countries" value="{{$index}}">{{country.countrySymbol}}</option>
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="dailyIncome">Daily income</label>
+				<label for="dailyIncome">Daily income ({{getCurrentCountryCurrencySymbol()}})</label>
 				<input class="form-control" id="dailyIncome" type="number" ng-model="dailyIncome" ng-change="calculateGain()" />
 			</div>
 			<div class="form-group">

@@ -10,19 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import pl.wercia.calculator.model.Country;
 import pl.wercia.calculator.service.country.CountryService;
 
 @RestController
-@RequestMapping(value = "/countries")
+@RequestMapping(value = "/api")
 public class CountryController {
 
 	@Autowired
 	private List<CountryService> countryServices;
 
-	@RequestMapping(value = "/symbols")
-	public List<String> getAvailableCountrySymbols() {
+	@RequestMapping(value = "/countries")
+	public List<Country> getAvailableCountries() {
 		return countryServices.stream()
-				.map(countryService -> countryService.getCountrySymbol())
+				.map(countryService -> countryService.getCountryDetails())
 				.collect(Collectors.toList());
 	}
 
@@ -31,7 +32,7 @@ public class CountryController {
 			@RequestParam(value = "countryCode", defaultValue = "") String countryCode,
 			@RequestParam(value = "dailyIncome", defaultValue = "0") BigDecimal dailyIncome) {
 		Optional<CountryService> countryService = countryServices.stream()
-				.filter(service -> service.getCountrySymbol().equals(countryCode))
+				.filter(service -> service.hasCountrySymbol(countryCode))
 				.findFirst();
 		return countryService.isPresent()
 				? countryService.get().calculateGainByDailyIncome(dailyIncome)

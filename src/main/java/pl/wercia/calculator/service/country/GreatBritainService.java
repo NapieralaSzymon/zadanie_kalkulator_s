@@ -4,17 +4,14 @@ import java.math.BigDecimal;
 
 import org.springframework.stereotype.Service;
 
+import pl.wercia.calculator.model.Country;
+
 @Service
 public class GreatBritainService extends CountryService {
 
 	@Override
-	public String getCountrySymbol() {
-		return "UK";
-	}
-
-	@Override
-	public String getCurrencySymbol() {
-		return "GBP";
+	public Country getCountryDetails() {
+		return new Country("UK", "GBP");
 	}
 
 	@Override

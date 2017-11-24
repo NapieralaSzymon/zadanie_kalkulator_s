@@ -4,17 +4,14 @@ import java.math.BigDecimal;
 
 import org.springframework.stereotype.Service;
 
+import pl.wercia.calculator.model.Country;
+
 @Service
 public class GermanyService extends CountryService {
 
 	@Override
-	public String getCountrySymbol() {
-		return "DE";
-	}
-
-	@Override
-	public String getCurrencySymbol() {
-		return "EUR";
+	public Country getCountryDetails() {
+		return new Country("DE", "EUR");
 	}
 
 	@Override

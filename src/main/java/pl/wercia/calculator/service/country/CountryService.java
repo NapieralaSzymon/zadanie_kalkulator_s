@@ -1,14 +1,19 @@
 package pl.wercia.calculator.service.country;
 
 import java.math.BigDecimal;
+import java.util.Objects;
+
+import pl.wercia.calculator.model.Country;
 
 public abstract class CountryService {
 
 	private static final int WORK_DAYS_IN_MONTH = 22;
 
-	public abstract String getCountrySymbol();
+	public abstract Country getCountryDetails();
 
-	public abstract String getCurrencySymbol();
+	public boolean hasCountrySymbol(String countrySymbol) {
+		return Objects.equals(countrySymbol, getCountryDetails().getCountrySymbol());
+	}
 
 	public abstract BigDecimal getIncomeTax();
 
