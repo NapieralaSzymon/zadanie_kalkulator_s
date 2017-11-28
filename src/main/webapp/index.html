@@ -35,8 +35,14 @@
 				<input class="form-control" id="dailyIncome" type="number" ng-model="dailyIncome" ng-change="calculateGain()" />
 			</div>
 			<div class="form-group">
-				<label for="gain">Gain</label>
-				<input class="form-control" id="gain" disabled="disabled" value="{{gain}}" />
+				<label for="countrySymbol">Currency</label>
+				<select class="form-control" id="currencySymbol" ng-model="currencyIndex" ng-change="calculateGain()">
+					<option ng-repeat="country in countries" value="{{$index}}">{{country.currencySymbol}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="gain">Gain ({{gain.currencySymbol}})</label>
+				<input class="form-control" id="gain" disabled="disabled" value="{{gain.amount}}" />
 			</div>
 		</form>
 

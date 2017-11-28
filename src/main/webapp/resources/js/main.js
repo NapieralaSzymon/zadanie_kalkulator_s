@@ -4,6 +4,7 @@ calculatorApp.controller("CalculatorController", ["$http", "$scope",
 		function CalculatorController($http, $scope) {
 
 	$scope.countryIndex = null;
+	$scope.currencyIndex = null;
 	$scope.dailyIncome = 0;
 
 	$scope.countries = [];
@@ -28,11 +29,22 @@ calculatorApp.controller("CalculatorController", ["$http", "$scope",
 		return (country != null) ? country.currencySymbol : null;
 	};
 
+	$scope.getCurrentCurrency = function() {
+		return ($scope.currencyIndex != null)
+				? $scope.countries[parseInt($scope.currencyIndex)] : null;
+	};
+
+	$scope.getCurrentCurrencySymbol = function() {
+		var currency = $scope.getCurrentCurrency();
+		return (currency != null) ? currency.currencySymbol : null;
+	};
+
 	$scope.calculateGain = function() {
 		$http.get("api/gain", {
 			params: {
 				countryCode: $scope.getCurrentCountrySymbol(),
-				dailyIncome: $scope.dailyIncome
+				dailyIncome: $scope.dailyIncome,
+				targetCurrency: $scope.getCurrentCurrencySymbol()
 			}
 		}).then(function(response) {
 			$scope.gain = response.data;
