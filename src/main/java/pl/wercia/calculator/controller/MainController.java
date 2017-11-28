@@ -38,7 +38,7 @@ public class MainController {
 	public Amount getGain(
 			@RequestParam(value = "countryCode", defaultValue = "") String countryCode,
 			@RequestParam(value = "dailyIncome", defaultValue = "0") BigDecimal dailyIncome,
-			@RequestParam(value = "targetCurrency", defaultValue = "") String targetCurrency) {
+			@RequestParam(value = "targetCurrency", defaultValue = "PLN") String targetCurrency) {
 		Optional<CountryService> countryService = countryServices.stream()
 				.filter(service -> service.hasCountrySymbol(countryCode))
 				.findFirst();
